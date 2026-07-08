@@ -1,6 +1,6 @@
 [package]
 name = "aldrava"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.89.0"
 description = "aldrava — the typed knock: comment-command dispatch. Parses a PR/issue comment slash-command, resolves trust against the commenter, and dispatches a target (label relabel, workflow_dispatch, repository_dispatch) — never both silently and never on an untrusted knock."
