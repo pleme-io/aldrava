@@ -82,7 +82,10 @@ fn match_trigger<'a>(body: &'a str, trigger: &str) -> Option<Vec<&'a str>> {
     }
 }
 
-fn find_command<'a>(catalog: &'a CatalogSpec, body: &str) -> Option<(&'a CommentCommandSpec, Vec<String>)> {
+fn find_command<'a>(
+    catalog: &'a CatalogSpec,
+    body: &str,
+) -> Option<(&'a CommentCommandSpec, Vec<String>)> {
     for cmd in &catalog.commands {
         if let Some(args) = match_trigger(body.trim_start(), &cmd.trigger) {
             return Some((cmd, args.into_iter().map(str::to_string).collect()));
@@ -91,7 +94,12 @@ fn find_command<'a>(catalog: &'a CatalogSpec, body: &str) -> Option<(&'a Comment
     None
 }
 
-fn is_trusted(spec: &CommentCommandSpec, commenter: &str, pr_author: &str, env: &dyn Environment) -> bool {
+fn is_trusted(
+    spec: &CommentCommandSpec,
+    commenter: &str,
+    pr_author: &str,
+    env: &dyn Environment,
+) -> bool {
     if spec.trust_pr_author && commenter == pr_author {
         return true;
     }
@@ -113,7 +121,9 @@ fn substitute(template: &str, ctx: &ResolvedContext, args: &[String]) -> String 
         "$base-ref" => ctx.base_ref.clone(),
         "$pr-author" => ctx.pr_author.clone(),
         _ => {
-            if let Some(digit) = template.strip_prefix('$').and_then(|d| d.parse::<usize>().ok())
+            if let Some(digit) = template
+                .strip_prefix('$')
+                .and_then(|d| d.parse::<usize>().ok())
                 && digit >= 1
             {
                 return args.get(digit - 1).cloned().unwrap_or_default();
@@ -144,16 +154,26 @@ fn dispatch_target(
     match target {
         DispatchTarget::Label { name } => {
             env.relabel(issue_number, name)
-                .map_err(|source| SpecError::Interp { phase: "relabel", source })?;
+                .map_err(|source| SpecError::Interp {
+                    phase: "relabel",
+                    source,
+                })?;
             Ok(("label", name.clone()))
         }
-        DispatchTarget::WorkflowDispatch { workflow, git_ref, inputs } => {
+        DispatchTarget::WorkflowDispatch {
+            workflow,
+            git_ref,
+            inputs,
+        } => {
             let resolved_ref = git_ref
                 .as_deref()
                 .map_or_else(|| ctx.branch_ref.clone(), |r| substitute(r, ctx, args));
             let resolved_inputs = substitute_inputs(inputs, ctx, args);
             env.dispatch_workflow(workflow, &resolved_ref, &resolved_inputs)
-                .map_err(|source| SpecError::Interp { phase: "workflow-dispatch", source })?;
+                .map_err(|source| SpecError::Interp {
+                    phase: "workflow-dispatch",
+                    source,
+                })?;
             Ok(("workflow-dispatch", workflow.clone()))
         }
         DispatchTarget::RepositoryDispatch { event_type, repo } => {
@@ -165,7 +185,10 @@ fn dispatch_target(
                 "args": args,
             });
             env.repository_dispatch(event_type, repo.as_deref(), &payload)
-                .map_err(|source| SpecError::Interp { phase: "repository-dispatch", source })?;
+                .map_err(|source| SpecError::Interp {
+                    phase: "repository-dispatch",
+                    source,
+                })?;
             Ok(("repository-dispatch", event_type.clone()))
         }
     }
@@ -184,7 +207,12 @@ pub fn apply(
     event: &InboundEvent,
     env: &dyn Environment,
 ) -> Result<DispatchOutcome, SpecError> {
-    let InboundEvent::IssueComment { issue_number, comment_body, commenter_login } = event else {
+    let InboundEvent::IssueComment {
+        issue_number,
+        comment_body,
+        commenter_login,
+    } = event
+    else {
         return Ok(match event {
             InboundEvent::IssueCommentNotOnPullRequest => DispatchOutcome::NotOnPullRequest,
             other => DispatchOutcome::NoMatch {
@@ -227,7 +255,8 @@ pub fn apply(
         pr_author: pr.author.clone(),
     };
 
-    let (target_kind, target_detail) = dispatch_target(&cmd.target, *issue_number, &ctx, &args, env)?;
+    let (target_kind, target_detail) =
+        dispatch_target(&cmd.target, *issue_number, &ctx, &args, env)?;
 
     Ok(DispatchOutcome::Dispatched {
         command: cmd.name.clone(),
@@ -253,7 +282,9 @@ mod tests {
             min_permission: Permission::Write,
             trust_pr_author: true,
             allowlist: Vec::new(),
-            target: DispatchTarget::Label { name: "ci/run-tests".to_string() },
+            target: DispatchTarget::Label {
+                name: "ci/run-tests".to_string(),
+            },
         }
     }
 
@@ -280,9 +311,17 @@ mod tests {
         let env = MockEnvironment::new().with_pull_request(7, pr("alice"));
         let outcome = apply(&catalog, &comment("/test", "alice"), &env).unwrap();
         assert!(outcome.dispatched());
-        assert_eq!(env.labels_added.borrow().as_slice(), &[(7, "ci/run-tests".to_string())]);
-        assert_eq!(env.labels_removed.borrow().as_slice(), &[(7, "ci/run-tests".to_string())]);
-        let DispatchOutcome::Dispatched { context, .. } = outcome else { unreachable!() };
+        assert_eq!(
+            env.labels_added.borrow().as_slice(),
+            &[(7, "ci/run-tests".to_string())]
+        );
+        assert_eq!(
+            env.labels_removed.borrow().as_slice(),
+            &[(7, "ci/run-tests".to_string())]
+        );
+        let DispatchOutcome::Dispatched { context, .. } = outcome else {
+            unreachable!()
+        };
         // is_develop tracks the PR's own HEAD ref ("feature-x"), not its base.
         assert!(!context.is_develop);
         assert_eq!(context.checkout_ref, "deadbeef");
@@ -296,7 +335,10 @@ mod tests {
             .with_permission("mallory", Permission::Read);
         let outcome = apply(&catalog, &comment("/test", "mallory"), &env).unwrap();
         assert!(matches!(outcome, DispatchOutcome::Rejected { .. }));
-        assert!(env.labels_added.borrow().is_empty(), "must never mutate on an untrusted knock");
+        assert!(
+            env.labels_added.borrow().is_empty(),
+            "must never mutate on an untrusted knock"
+        );
     }
 
     #[test]
@@ -343,7 +385,9 @@ mod tests {
         let catalog = CatalogSpec::single(label_command("deploy", "/deploy"));
         let env = MockEnvironment::new().with_pull_request(7, pr("alice"));
         let outcome = apply(&catalog, &comment("/deploy staging now", "alice"), &env).unwrap();
-        let DispatchOutcome::Dispatched { args, .. } = outcome else { panic!("expected dispatch") };
+        let DispatchOutcome::Dispatched { args, .. } = outcome else {
+            panic!("expected dispatch")
+        };
         assert_eq!(args, vec!["staging".to_string(), "now".to_string()]);
     }
 
@@ -388,7 +432,10 @@ mod tests {
         let (workflow, git_ref, inputs) = &dispatches[0];
         assert_eq!(workflow, "deploy.yml");
         assert_eq!(git_ref, "refs/heads/feature-x");
-        assert_eq!(inputs.get("environment").map(String::as_str), Some("staging"));
+        assert_eq!(
+            inputs.get("environment").map(String::as_str),
+            Some("staging")
+        );
         assert_eq!(inputs.get("sha").map(String::as_str), Some("deadbeef"));
     }
 

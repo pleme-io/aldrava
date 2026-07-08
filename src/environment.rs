@@ -111,7 +111,10 @@ impl MockEnvironment {
 
 impl Environment for MockEnvironment {
     fn collaborator_permission(&self, login: &str) -> Permission {
-        self.permissions.get(login).copied().unwrap_or(Permission::None)
+        self.permissions
+            .get(login)
+            .copied()
+            .unwrap_or(Permission::None)
     }
 
     fn get_pull_request(&self, issue_number: u64) -> Option<PullRequestInfo> {
@@ -119,12 +122,16 @@ impl Environment for MockEnvironment {
     }
 
     fn add_label(&self, issue_number: u64, label: &str) -> Result<(), EnvError> {
-        self.labels_added.borrow_mut().push((issue_number, label.to_string()));
+        self.labels_added
+            .borrow_mut()
+            .push((issue_number, label.to_string()));
         Ok(())
     }
 
     fn remove_label(&self, issue_number: u64, label: &str) -> Result<(), EnvError> {
-        self.labels_removed.borrow_mut().push((issue_number, label.to_string()));
+        self.labels_removed
+            .borrow_mut()
+            .push((issue_number, label.to_string()));
         Ok(())
     }
 
@@ -134,9 +141,11 @@ impl Environment for MockEnvironment {
         git_ref: &str,
         inputs: &BTreeMap<String, String>,
     ) -> Result<(), EnvError> {
-        self.workflow_dispatches
-            .borrow_mut()
-            .push((workflow.to_string(), git_ref.to_string(), inputs.clone()));
+        self.workflow_dispatches.borrow_mut().push((
+            workflow.to_string(),
+            git_ref.to_string(),
+            inputs.clone(),
+        ));
         Ok(())
     }
 
@@ -166,12 +175,17 @@ pub struct GitHubEnvironment {
 
 impl GitHubEnvironment {
     #[must_use]
-    pub fn new(owner: impl Into<String>, repo: impl Into<String>, token: impl Into<String>) -> Self {
+    pub fn new(
+        owner: impl Into<String>,
+        repo: impl Into<String>,
+        token: impl Into<String>,
+    ) -> Self {
         Self {
             owner: owner.into(),
             repo: repo.into(),
             token: token.into(),
-            api_base: std::env::var("GITHUB_API_URL").unwrap_or_else(|_| "https://api.github.com".to_string()),
+            api_base: std::env::var("GITHUB_API_URL")
+                .unwrap_or_else(|_| "https://api.github.com".to_string()),
             agent: ureq::AgentBuilder::new().build(),
         }
     }
@@ -192,12 +206,20 @@ impl GitHubEnvironment {
 
 impl Environment for GitHubEnvironment {
     fn collaborator_permission(&self, login: &str) -> Permission {
-        let url = self.repos_url(&self.owner, &self.repo, &format!("/collaborators/{login}/permission"));
+        let url = self.repos_url(
+            &self.owner,
+            &self.repo,
+            &format!("/collaborators/{login}/permission"),
+        );
         match self.request("GET", &url).call() {
             Ok(resp) => resp
                 .into_json::<Value>()
                 .ok()
-                .and_then(|v| v.get("permission").and_then(Value::as_str).map(Permission::from_github_str))
+                .and_then(|v| {
+                    v.get("permission")
+                        .and_then(Value::as_str)
+                        .map(Permission::from_github_str)
+                })
                 .unwrap_or(Permission::None),
             Err(_) => Permission::None,
         }
@@ -215,7 +237,11 @@ impl Environment for GitHubEnvironment {
     }
 
     fn add_label(&self, issue_number: u64, label: &str) -> Result<(), EnvError> {
-        let url = self.repos_url(&self.owner, &self.repo, &format!("/issues/{issue_number}/labels"));
+        let url = self.repos_url(
+            &self.owner,
+            &self.repo,
+            &format!("/issues/{issue_number}/labels"),
+        );
         self.request("POST", &url)
             .send_json(serde_json::json!({ "labels": [label] }))
             .map(|_| ())
@@ -224,7 +250,11 @@ impl Environment for GitHubEnvironment {
 
     fn remove_label(&self, issue_number: u64, label: &str) -> Result<(), EnvError> {
         let encoded = urlencoding_light(label);
-        let url = self.repos_url(&self.owner, &self.repo, &format!("/issues/{issue_number}/labels/{encoded}"));
+        let url = self.repos_url(
+            &self.owner,
+            &self.repo,
+            &format!("/issues/{issue_number}/labels/{encoded}"),
+        );
         match self.request("DELETE", &url).call() {
             Ok(_) | Err(ureq::Error::Status(404, _)) => Ok(()),
             Err(e) => Err(EnvError::Request(e.to_string())),
@@ -237,7 +267,11 @@ impl Environment for GitHubEnvironment {
         git_ref: &str,
         inputs: &BTreeMap<String, String>,
     ) -> Result<(), EnvError> {
-        let url = self.repos_url(&self.owner, &self.repo, &format!("/actions/workflows/{workflow}/dispatches"));
+        let url = self.repos_url(
+            &self.owner,
+            &self.repo,
+            &format!("/actions/workflows/{workflow}/dispatches"),
+        );
         self.request("POST", &url)
             .send_json(serde_json::json!({ "ref": git_ref, "inputs": inputs }))
             .map(|_| ())
@@ -270,7 +304,9 @@ fn urlencoding_light(s: &str) -> String {
     let mut out = String::with_capacity(s.len());
     for b in s.bytes() {
         match b {
-            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => out.push(b as char),
+            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => {
+                out.push(b as char)
+            }
             _ => {
                 let _ = write!(out, "%{b:02X}");
             }
@@ -288,8 +324,14 @@ mod tests {
     fn mock_records_relabel_as_remove_then_add() {
         let env = MockEnvironment::new();
         env.relabel(7, "ci/run-tests").unwrap();
-        assert_eq!(env.labels_removed.borrow().as_slice(), &[(7, "ci/run-tests".to_string())]);
-        assert_eq!(env.labels_added.borrow().as_slice(), &[(7, "ci/run-tests".to_string())]);
+        assert_eq!(
+            env.labels_removed.borrow().as_slice(),
+            &[(7, "ci/run-tests".to_string())]
+        );
+        assert_eq!(
+            env.labels_added.borrow().as_slice(),
+            &[(7, "ci/run-tests".to_string())]
+        );
     }
 
     #[test]
