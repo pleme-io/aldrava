@@ -1,0 +1,41 @@
+[package]
+name = "aldrava"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89.0"
+description = "aldrava — the typed knock: comment-command dispatch. Parses a PR/issue comment slash-command, resolves trust against the commenter, and dispatches a target (label relabel, workflow_dispatch, repository_dispatch) — never both silently and never on an untrusted knock."
+homepage = "https://github.com/pleme-io/aldrava"
+repository = "https://github.com/pleme-io/aldrava"
+license = "MIT"
+authors = ["pleme-io"]
+
+[lib]
+name = "aldrava"
+path = "src/lib.rs"
+
+[[bin]]
+name = "aldrava"
+path = "src/main.rs"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+ureq = { version = "2", features = ["json"] }
+
+[dev-dependencies]
+serde_json = "1"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+strip = true
