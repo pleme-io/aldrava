@@ -352,9 +352,19 @@ mod tests {
 
     #[test]
     fn always_run_events_resolve_should_run_true() {
-        for name in ["workflow_dispatch", "repository_dispatch", "schedule", "workflow_call"] {
+        for name in [
+            "workflow_dispatch",
+            "repository_dispatch",
+            "schedule",
+            "workflow_call",
+        ] {
             let ev = resolve(name, &json!({}));
-            assert_eq!(ev, InboundEvent::AlwaysRun { event_name: name.into() });
+            assert_eq!(
+                ev,
+                InboundEvent::AlwaysRun {
+                    event_name: name.into()
+                }
+            );
             let ctx = RunContext::resolve(&ev, Some("ci/run-tests"), "deadbeef", "refs/heads/main");
             assert!(ctx.should_run);
             assert_eq!(ctx.checkout_ref, "deadbeef");
@@ -365,7 +375,9 @@ mod tests {
     fn unsupported_event_name_is_named_not_panicking() {
         assert_eq!(
             resolve("pull_request_review", &json!({})),
-            InboundEvent::Unsupported { event_name: "pull_request_review".into() }
+            InboundEvent::Unsupported {
+                event_name: "pull_request_review".into()
+            }
         );
     }
 }

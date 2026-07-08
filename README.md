@@ -50,6 +50,34 @@ aldrava lint .github/aldrava.lisp
 `$GITHUB_EVENT_NAME` by default (overridable via `--event-path`/
 `--event-name` for local testing) and print one JSON object to stdout.
 
+## Testing
+
+Two layers, both `cargo test`:
+
+- **Unit tests** (`#[cfg(test)] mod tests` in each `src/*.rs`) — hand-picked
+  examples pinning one specific behavior each.
+- **Property tests** (`tests/property_*.rs`, `proptest`, 256 cases each) —
+  the fleet-canonical correctness-proof mechanism (see the
+  `compiler-verifier` skill; minimum 100 cases/property). Pin the
+  invariants unit tests can't: the parser never panics on arbitrary input
+  (`tests/property_spec_lisp.rs`), trust resolution is consistent across
+  every `Permission` tier and never mutates the environment on an
+  untrusted knock (`tests/property_interp.rs`).
+
+```
+cargo test                    # unit + property + integration, all of it
+cargo tarpaulin --out Html     # line coverage (Linux/CI; see note below)
+```
+
+Coverage runs via `pleme-io/actions/coverage-upload` (`cargo-tarpaulin` ->
+Codecov) in `.github/workflows/ci.yml`, on every push/PR — the fleet's one
+coverage primitive, previously unused fleet-wide; this is its first real
+adopter. `cargo-tarpaulin`'s default LLVM engine needs a `profiler_builtins`-
+enabled rustc (`dtolnay/rust-toolchain@stable` on the Linux CI runner has
+one; plain `nixpkgs#rustc` on macOS does not) — run it locally via `nix
+shell "github:nix-community/fenix#complete.toolchain" nixpkgs#cargo-tarpaulin`
+instead of the bare nixpkgs toolchain.
+
 ## Trust model
 
 A knock is trusted when, in order: the commenter is the PR's own author

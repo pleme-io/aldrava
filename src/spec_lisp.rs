@@ -183,11 +183,17 @@ fn parse_one(tokens: &[Token], pos: usize) -> Result<(SExpr, usize), LintError> 
                         items.push(expr);
                         cur = next;
                     }
-                    None => return Err(LintError::Syntax("unexpected end of input inside `(...)`; missing `)`".into())),
+                    None => {
+                        return Err(LintError::Syntax(
+                            "unexpected end of input inside `(...)`; missing `)`".into(),
+                        ));
+                    }
                 }
             }
         }
-        Some(Token::Close) => Err(LintError::Syntax("unexpected `)` with no matching `(`".into())),
+        Some(Token::Close) => Err(LintError::Syntax(
+            "unexpected `)` with no matching `(`".into(),
+        )),
         Some(Token::Sym(s)) => Ok((SExpr::Sym(s.clone()), pos + 1)),
         Some(Token::Str(s)) => Ok((SExpr::Str(s.clone()), pos + 1)),
         None => Err(LintError::Syntax("unexpected end of input".into())),
@@ -205,7 +211,10 @@ fn split_kwargs(items: &[SExpr]) -> Result<(Vec<SExpr>, BTreeMap<String, SExpr>)
         if let SExpr::Sym(s) = &items[i]
             && let Some(key) = s.strip_prefix(':')
         {
-            let val = items.get(i + 1).cloned().ok_or_else(|| LintError::Syntax(format!("keyword `:{key}` has no value")))?;
+            let val = items
+                .get(i + 1)
+                .cloned()
+                .ok_or_else(|| LintError::Syntax(format!("keyword `:{key}` has no value")))?;
             kwargs.insert(key.to_string(), val);
             i += 2;
             continue;
@@ -324,7 +333,8 @@ fn parse_target(expr: &SExpr, ctx: &str) -> Result<DispatchTarget, LintError> {
                 .get(1)
                 .ok_or_else(|| LintError::Semantic {
                     form: ctx.to_string(),
-                    message: "`(workflow-dispatch ...)` requires a workflow-file string".to_string(),
+                    message: "`(workflow-dispatch ...)` requires a workflow-file string"
+                        .to_string(),
                 })
                 .and_then(|e| expect_str(e, ctx))?;
             let git_ref = kwargs.get("ref").map(|e| expect_str(e, ctx)).transpose()?;
@@ -344,7 +354,8 @@ fn parse_target(expr: &SExpr, ctx: &str) -> Result<DispatchTarget, LintError> {
                 .get(1)
                 .ok_or_else(|| LintError::Semantic {
                     form: ctx.to_string(),
-                    message: "`(repository-dispatch ...)` requires an event-type string".to_string(),
+                    message: "`(repository-dispatch ...)` requires an event-type string"
+                        .to_string(),
                 })
                 .and_then(|e| expect_str(e, ctx))?;
             let repo = kwargs.get("repo").map(|e| expect_str(e, ctx)).transpose()?;
@@ -459,7 +470,12 @@ mod tests {
         assert_eq!(cmd.trigger, "/test");
         assert_eq!(cmd.min_permission, Permission::Write);
         assert!(cmd.trust_pr_author);
-        assert_eq!(cmd.target, DispatchTarget::Label { name: "ci/run-tests".into() });
+        assert_eq!(
+            cmd.target,
+            DispatchTarget::Label {
+                name: "ci/run-tests".into()
+            }
+        );
     }
 
     #[test]
@@ -480,7 +496,11 @@ mod tests {
         assert!(!cmd.trust_pr_author);
         assert_eq!(cmd.allowlist, vec!["release-bot", "ops-team-bot"]);
         match &cmd.target {
-            DispatchTarget::WorkflowDispatch { workflow, git_ref, inputs } => {
+            DispatchTarget::WorkflowDispatch {
+                workflow,
+                git_ref,
+                inputs,
+            } => {
                 assert_eq!(workflow, "deploy.yml");
                 assert_eq!(git_ref.as_deref(), Some("$branch-ref"));
                 assert_eq!(inputs.get("environment").map(String::as_str), Some("$1"));
@@ -513,7 +533,10 @@ mod tests {
     fn unterminated_paren_is_a_named_syntax_error() {
         let src = r#"(defcommentcommand "test" :trigger "/test""#;
         let err = parse(src).unwrap_err();
-        assert!(err.to_string().to_lowercase().contains("missing `)`") || err.to_string().to_lowercase().contains("end of input"));
+        assert!(
+            err.to_string().to_lowercase().contains("missing `)`")
+                || err.to_string().to_lowercase().contains("end of input")
+        );
     }
 
     #[test]

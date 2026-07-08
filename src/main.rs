@@ -16,7 +16,11 @@ use aldrava::spec::{CatalogSpec, CommentCommandSpec, DispatchTarget, Permission}
 use aldrava::spec_lisp;
 
 #[derive(Parser)]
-#[command(name = "aldrava", version, about = "The typed knock — comment-command dispatch for GitHub Actions")]
+#[command(
+    name = "aldrava",
+    version,
+    about = "The typed knock — comment-command dispatch for GitHub Actions"
+)]
 struct Cli {
     #[command(subcommand)]
     command: Command,
@@ -62,7 +66,8 @@ impl EventSource {
             .context("event path not given: pass --event-path or set GITHUB_EVENT_PATH")?;
         let raw = std::fs::read_to_string(&path)
             .with_context(|| format!("reading event payload at {}", path.display()))?;
-        let payload: Value = serde_json::from_str(&raw).context("event payload is not valid JSON")?;
+        let payload: Value =
+            serde_json::from_str(&raw).context("event payload is not valid JSON")?;
         Ok((event_name, payload))
     }
 }
@@ -152,7 +157,13 @@ impl DispatchArgs {
         let allowlist = self
             .allowlist
             .as_deref()
-            .map(|s| s.split(',').map(str::trim).filter(|s| !s.is_empty()).map(str::to_string).collect())
+            .map(|s| {
+                s.split(',')
+                    .map(str::trim)
+                    .filter(|s| !s.is_empty())
+                    .map(str::to_string)
+                    .collect()
+            })
             .unwrap_or_default();
         let target = self.resolve_target()?;
         Ok(CatalogSpec::single(CommentCommandSpec {
@@ -189,7 +200,9 @@ impl DispatchArgs {
                 repo: self.target_repository_dispatch_repo.clone(),
             });
         }
-        bail!("no target given: one of --target-label / --target-workflow / --target-repository-dispatch-event is required")
+        bail!(
+            "no target given: one of --target-label / --target-workflow / --target-repository-dispatch-event is required"
+        )
     }
 }
 
@@ -201,7 +214,9 @@ fn parse_permission(s: &str) -> Result<Permission> {
         "write" => Permission::Write,
         "maintain" => Permission::Maintain,
         "admin" => Permission::Admin,
-        other => bail!("unknown --min-permission `{other}` — expected one of none|read|triage|write|maintain|admin"),
+        other => bail!(
+            "unknown --min-permission `{other}` — expected one of none|read|triage|write|maintain|admin"
+        ),
     })
 }
 
@@ -231,14 +246,25 @@ fn outcome_to_json(outcome: &DispatchOutcome) -> Value {
             "outcome": "no-match",
             "reason": reason,
         }),
-        DispatchOutcome::Rejected { command, commenter, reason } => json!({
+        DispatchOutcome::Rejected {
+            command,
+            commenter,
+            reason,
+        } => json!({
             "dispatched": false,
             "outcome": "rejected",
             "command": command,
             "commenter": commenter,
             "reason": reason,
         }),
-        DispatchOutcome::Dispatched { command, args, commenter, context, target_kind, target_detail } => json!({
+        DispatchOutcome::Dispatched {
+            command,
+            args,
+            commenter,
+            context,
+            target_kind,
+            target_detail,
+        } => json!({
             "dispatched": true,
             "outcome": "dispatched",
             "command": command,
@@ -270,7 +296,12 @@ fn run_resolve(args: &ResolveArgs) -> Result<Value> {
     let inbound = event::resolve(&event_name, &payload);
     let fallback_sha = std::env::var("GITHUB_SHA").unwrap_or_default();
     let fallback_ref = std::env::var("GITHUB_REF").unwrap_or_default();
-    let ctx = RunContext::resolve(&inbound, args.label_name.as_deref(), &fallback_sha, &fallback_ref);
+    let ctx = RunContext::resolve(
+        &inbound,
+        args.label_name.as_deref(),
+        &fallback_sha,
+        &fallback_ref,
+    );
     Ok(serde_json::to_value(ctx)?)
 }
 
