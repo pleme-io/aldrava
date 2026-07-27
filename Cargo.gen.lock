@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cargo_lock_sha256": "b8e1210a0926edcd70fe9c65f2f1ba3a31dea09c8a465d8db6ada525f30b87a0",
+  "cargo_lock_sha256": "b90ea52a3d17264a4a57e49b4b934f91668b01972f26eef2c105d401c4786a9a",
   "target_resolves": {
     "base": {
       "adler2-2.0.1": {
@@ -22,7 +22,7 @@
           },
           {
             "name": "clap",
-            "package_key": "clap-4.6.2",
+            "package_key": "clap-4.6.1",
             "kind": "normal",
             "features": [
               "derive"
@@ -231,14 +231,14 @@
           "std"
         ]
       },
-      "bitflags-2.13.1": {
+      "bitflags-2.13.0": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
           "std"
         ]
       },
-      "cc-1.2.67": {
+      "cc-1.2.66": {
         "runtime_dependencies": [
           {
             "name": "find_msvc_tools",
@@ -269,11 +269,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "clap-4.6.2": {
+      "clap-4.6.1": {
         "runtime_dependencies": [
           {
             "name": "clap_builder",
-            "package_key": "clap_builder-4.6.2",
+            "package_key": "clap_builder-4.6.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -304,7 +304,7 @@
           "usage"
         ]
       },
-      "clap_builder-4.6.2": {
+      "clap_builder-4.6.0": {
         "runtime_dependencies": [
           {
             "name": "anstream",
@@ -391,7 +391,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [
               "full"
@@ -465,7 +465,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1311,7 +1311,7 @@
           },
           {
             "name": "simd_adler32",
-            "package_key": "simd-adler32-0.3.10",
+            "package_key": "simd-adler32-0.3.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1385,7 +1385,7 @@
         "runtime_dependencies": [
           {
             "name": "zerocopy",
-            "package_key": "zerocopy-0.8.54",
+            "package_key": "zerocopy-0.8.53",
             "kind": "normal",
             "features": [
               "simd"
@@ -1474,7 +1474,7 @@
           },
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.1",
+            "package_key": "bitflags-2.13.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1494,7 +1494,7 @@
           },
           {
             "name": "rand",
-            "package_key": "rand-0.9.5",
+            "package_key": "rand-0.9.4",
             "kind": "normal",
             "features": [
               "alloc"
@@ -1601,7 +1601,7 @@
           "proc-macro"
         ]
       },
-      "rand-0.9.5": {
+      "rand-0.9.4": {
         "runtime_dependencies": [
           {
             "name": "rand_core",
@@ -1702,7 +1702,7 @@
           "unicode-segment"
         ]
       },
-      "rustls-0.23.42": {
+      "rustls-0.23.41": {
         "runtime_dependencies": [
           {
             "name": "log",
@@ -1969,7 +1969,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -2023,7 +2023,7 @@
           },
           {
             "name": "zmij",
-            "package_key": "zmij-1.0.23",
+            "package_key": "zmij-1.0.21",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2046,7 +2046,7 @@
           "std"
         ]
       },
-      "simd-adler32-0.3.10": {
+      "simd-adler32-0.3.9": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2073,7 +2073,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "syn-2.0.119": {
+      "syn-2.0.118": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
@@ -2144,7 +2144,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -2262,7 +2262,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2361,7 +2361,7 @@
           },
           {
             "name": "rustls",
-            "package_key": "rustls-0.23.42",
+            "package_key": "rustls-0.23.41",
             "kind": "normal",
             "features": [
               "logging",
@@ -2616,7 +2616,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [
               "fold"
@@ -2640,7 +2640,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "zerocopy-0.8.54": {
+      "zerocopy-0.8.53": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -2689,7 +2689,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [
               "fold"
@@ -2825,7 +2825,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.119",
+            "package_key": "syn-2.0.118",
             "kind": "normal",
             "features": [
               "extra-traits"
@@ -2839,7 +2839,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "zmij-1.0.23": {
+      "zmij-1.0.21": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2904,7 +2904,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.67",
+                "package_key": "cc-1.2.66",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -2923,7 +2923,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.1",
+                "package_key": "bitflags-2.13.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3062,7 +3062,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.67",
+                "package_key": "cc-1.2.66",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3081,7 +3081,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.1",
+                "package_key": "bitflags-2.13.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3251,7 +3251,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.67",
+                "package_key": "cc-1.2.66",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3270,7 +3270,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.1",
+                "package_key": "bitflags-2.13.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3408,7 +3408,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.67",
+                "package_key": "cc-1.2.66",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3427,7 +3427,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.1",
+                "package_key": "bitflags-2.13.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3546,7 +3546,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.67",
+                "package_key": "cc-1.2.66",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3565,7 +3565,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.1",
+                "package_key": "bitflags-2.13.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3715,7 +3715,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.67",
+                "package_key": "cc-1.2.66",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3734,7 +3734,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.1",
+                "package_key": "bitflags-2.13.0",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3881,16 +3881,16 @@
     "bit-vec-0.8.0": {
       "edition": "2015"
     },
-    "bitflags-2.13.1": {
+    "bitflags-2.13.0": {
       "edition": "2021"
     },
-    "cc-1.2.67": {
+    "cc-1.2.66": {
       "edition": "2018"
     },
     "cfg-if-1.0.4": {
       "edition": "2018"
     },
-    "clap-4.6.2": {
+    "clap-4.6.1": {
       "edition": "2024",
       "binaries": [
         {
@@ -3899,7 +3899,7 @@
         }
       ]
     },
-    "clap_builder-4.6.2": {
+    "clap_builder-4.6.0": {
       "edition": "2024"
     },
     "clap_derive-4.6.1": {
@@ -4046,7 +4046,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rand-0.9.5": {
+    "rand-0.9.4": {
       "edition": "2021"
     },
     "rand_chacha-0.9.0": {
@@ -4070,7 +4070,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rustls-0.23.42": {
+    "rustls-0.23.41": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -4106,7 +4106,7 @@
     "shlex-2.0.1": {
       "edition": "2018"
     },
-    "simd-adler32-0.3.10": {
+    "simd-adler32-0.3.9": {
       "edition": "2018"
     },
     "smallvec-1.15.2": {
@@ -4121,7 +4121,7 @@
     "subtle-2.6.1": {
       "edition": "2018"
     },
-    "syn-2.0.119": {
+    "syn-2.0.118": {
       "edition": "2021"
     },
     "synstructure-0.13.2": {
@@ -4198,7 +4198,7 @@
       "edition": "2021",
       "proc_macro": true
     },
-    "zerocopy-0.8.54": {
+    "zerocopy-0.8.53": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -4222,7 +4222,7 @@
       "edition": "2021",
       "proc_macro": true
     },
-    "zmij-1.0.23": {
+    "zmij-1.0.21": {
       "edition": "2021",
       "build_script": "build.rs"
     }
