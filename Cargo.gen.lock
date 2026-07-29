@@ -1,6 +1,9 @@
 {
-  "schema_version": 1,
-  "cargo_lock_sha256": "b90ea52a3d17264a4a57e49b4b934f91668b01972f26eef2c105d401c4786a9a",
+  "schema_version": 2,
+  "cargo_lock_sha256": "9e55c9d0fd3abd07b397a66ca53de2bf9b30084daeb73e04f6a09c3e81fea09c",
+  "manifest_sha256": {
+    "Cargo.toml": "4934514e042bf6b5873bad28a0c2d591ab53139f83647423d1058103c06160e8"
+  },
   "target_resolves": {
     "base": {
       "adler2-2.0.1": {
@@ -12,7 +15,7 @@
         "runtime_dependencies": [
           {
             "name": "anyhow",
-            "package_key": "anyhow-1.0.103",
+            "package_key": "anyhow-1.0.104",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -22,7 +25,7 @@
           },
           {
             "name": "clap",
-            "package_key": "clap-4.6.1",
+            "package_key": "clap-4.6.2",
             "kind": "normal",
             "features": [
               "derive"
@@ -34,7 +37,7 @@
           },
           {
             "name": "serde",
-            "package_key": "serde-1.0.228",
+            "package_key": "serde-1.0.229",
             "kind": "normal",
             "features": [
               "derive"
@@ -56,7 +59,7 @@
           },
           {
             "name": "thiserror",
-            "package_key": "thiserror-2.0.18",
+            "package_key": "thiserror-2.0.19",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -182,7 +185,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "anyhow-1.0.103": {
+      "anyhow-1.0.104": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -231,14 +234,14 @@
           "std"
         ]
       },
-      "bitflags-2.13.0": {
+      "bitflags-2.13.1": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
           "std"
         ]
       },
-      "cc-1.2.66": {
+      "cc-1.3.0": {
         "runtime_dependencies": [
           {
             "name": "find_msvc_tools",
@@ -269,11 +272,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "clap-4.6.1": {
+      "clap-4.6.2": {
         "runtime_dependencies": [
           {
             "name": "clap_builder",
-            "package_key": "clap_builder-4.6.0",
+            "package_key": "clap_builder-4.6.2",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -304,7 +307,7 @@
           "usage"
         ]
       },
-      "clap_builder-4.6.0": {
+      "clap_builder-4.6.2": {
         "runtime_dependencies": [
           {
             "name": "anstream",
@@ -371,7 +374,7 @@
           },
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -381,7 +384,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -391,7 +394,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "full"
@@ -445,7 +448,7 @@
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -455,7 +458,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -465,7 +468,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1311,7 +1314,7 @@
           },
           {
             "name": "simd_adler32",
-            "package_key": "simd-adler32-0.3.9",
+            "package_key": "simd-adler32-0.3.10",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1385,7 +1388,7 @@
         "runtime_dependencies": [
           {
             "name": "zerocopy",
-            "package_key": "zerocopy-0.8.53",
+            "package_key": "zerocopy-0.8.54",
             "kind": "normal",
             "features": [
               "simd"
@@ -1431,7 +1434,7 @@
           "std"
         ]
       },
-      "proc-macro2-1.0.106": {
+      "proc-macro2-1.0.107": {
         "runtime_dependencies": [
           {
             "name": "unicode_ident",
@@ -1474,7 +1477,7 @@
           },
           {
             "name": "bitflags",
-            "package_key": "bitflags-2.13.0",
+            "package_key": "bitflags-2.13.1",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1494,7 +1497,7 @@
           },
           {
             "name": "rand",
-            "package_key": "rand-0.9.4",
+            "package_key": "rand-0.9.5",
             "kind": "normal",
             "features": [
               "alloc"
@@ -1582,11 +1585,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "quote-1.0.46": {
+      "quote-1.0.47": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -1601,7 +1604,7 @@
           "proc-macro"
         ]
       },
-      "rand-0.9.4": {
+      "rand-0.9.5": {
         "runtime_dependencies": [
           {
             "name": "rand_core",
@@ -1702,7 +1705,7 @@
           "unicode-segment"
         ]
       },
-      "rustls-0.23.41": {
+      "rustls-0.23.42": {
         "runtime_dependencies": [
           {
             "name": "log",
@@ -1900,11 +1903,11 @@
           "wait-timeout"
         ]
       },
-      "serde-1.0.228": {
+      "serde-1.0.229": {
         "runtime_dependencies": [
           {
             "name": "serde_core",
-            "package_key": "serde_core-1.0.228",
+            "package_key": "serde_core-1.0.229",
             "kind": "normal",
             "features": [
               "result"
@@ -1916,7 +1919,7 @@
           },
           {
             "name": "serde_derive",
-            "package_key": "serde_derive-1.0.228",
+            "package_key": "serde_derive-1.0.229",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -1933,7 +1936,7 @@
           "std"
         ]
       },
-      "serde_core-1.0.228": {
+      "serde_core-1.0.229": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -1941,11 +1944,11 @@
           "std"
         ]
       },
-      "serde_derive-1.0.228": {
+      "serde_derive-1.0.229": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [
               "proc-macro"
@@ -1957,7 +1960,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [
               "proc-macro"
@@ -1969,7 +1972,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-3.0.0",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -2013,7 +2016,7 @@
           },
           {
             "name": "serde_core",
-            "package_key": "serde_core-1.0.228",
+            "package_key": "serde_core-1.0.229",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2023,7 +2026,7 @@
           },
           {
             "name": "zmij",
-            "package_key": "zmij-1.0.21",
+            "package_key": "zmij-1.0.23",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2046,7 +2049,7 @@
           "std"
         ]
       },
-      "simd-adler32-0.3.9": {
+      "simd-adler32-0.3.10": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2073,11 +2076,11 @@
         "build_dependencies": [],
         "features": []
       },
-      "syn-2.0.118": {
+      "syn-2.0.119": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2087,7 +2090,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2120,11 +2123,11 @@
           "visit"
         ]
       },
-      "synstructure-0.13.2": {
+      "syn-3.0.0": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2134,7 +2137,50 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": true,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "unicode_ident",
+            "package_key": "unicode-ident-1.0.24",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": true,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          }
+        ],
+        "build_dependencies": [],
+        "features": [
+          "clone-impls",
+          "default",
+          "derive",
+          "parsing",
+          "printing",
+          "proc-macro"
+        ]
+      },
+      "synstructure-0.13.2": {
+        "runtime_dependencies": [
+          {
+            "name": "proc_macro2",
+            "package_key": "proc-macro2-1.0.107",
+            "kind": "normal",
+            "features": [],
+            "uses_default_features": false,
+            "optional": false,
+            "target": null,
+            "tree": "target"
+          },
+          {
+            "name": "quote",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": false,
@@ -2144,7 +2190,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "clone-impls",
@@ -2219,11 +2265,11 @@
           "getrandom"
         ]
       },
-      "thiserror-2.0.18": {
+      "thiserror-2.0.19": {
         "runtime_dependencies": [
           {
             "name": "thiserror_impl",
-            "package_key": "thiserror-impl-2.0.18",
+            "package_key": "thiserror-impl-2.0.19",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2238,11 +2284,11 @@
           "std"
         ]
       },
-      "thiserror-impl-2.0.18": {
+      "thiserror-impl-2.0.19": {
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2252,7 +2298,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2262,7 +2308,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-3.0.0",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2361,7 +2407,7 @@
           },
           {
             "name": "rustls",
-            "package_key": "rustls-0.23.41",
+            "package_key": "rustls-0.23.42",
             "kind": "normal",
             "features": [
               "logging",
@@ -2386,7 +2432,7 @@
           },
           {
             "name": "serde",
-            "package_key": "serde-1.0.228",
+            "package_key": "serde-1.0.229",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2511,7 +2557,7 @@
         "runtime_dependencies": [
           {
             "name": "parent",
-            "package_key": "webpki-roots-1.0.8",
+            "package_key": "webpki-roots-1.0.9",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2523,7 +2569,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "webpki-roots-1.0.8": {
+      "webpki-roots-1.0.9": {
         "runtime_dependencies": [
           {
             "name": "pki_types",
@@ -2596,7 +2642,7 @@
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2606,7 +2652,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2616,7 +2662,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "fold"
@@ -2640,7 +2686,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "zerocopy-0.8.53": {
+      "zerocopy-0.8.54": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": [
@@ -2669,7 +2715,7 @@
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2679,7 +2725,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2689,7 +2735,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "fold"
@@ -2805,7 +2851,7 @@
         "runtime_dependencies": [
           {
             "name": "proc_macro2",
-            "package_key": "proc-macro2-1.0.106",
+            "package_key": "proc-macro2-1.0.107",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2815,7 +2861,7 @@
           },
           {
             "name": "quote",
-            "package_key": "quote-1.0.46",
+            "package_key": "quote-1.0.47",
             "kind": "normal",
             "features": [],
             "uses_default_features": true,
@@ -2825,7 +2871,7 @@
           },
           {
             "name": "syn",
-            "package_key": "syn-2.0.118",
+            "package_key": "syn-2.0.119",
             "kind": "normal",
             "features": [
               "extra-traits"
@@ -2839,7 +2885,7 @@
         "build_dependencies": [],
         "features": []
       },
-      "zmij-1.0.21": {
+      "zmij-1.0.23": {
         "runtime_dependencies": [],
         "build_dependencies": [],
         "features": []
@@ -2904,7 +2950,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.66",
+                "package_key": "cc-1.3.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -2923,7 +2969,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3062,7 +3108,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.66",
+                "package_key": "cc-1.3.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3081,7 +3127,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3251,7 +3297,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.66",
+                "package_key": "cc-1.3.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3270,7 +3316,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3408,7 +3454,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.66",
+                "package_key": "cc-1.3.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3427,7 +3473,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3546,7 +3592,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.66",
+                "package_key": "cc-1.3.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3565,7 +3611,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3715,7 +3761,7 @@
             "build_dependencies": [
               {
                 "name": "cc",
-                "package_key": "cc-1.2.66",
+                "package_key": "cc-1.3.0",
                 "kind": "build",
                 "features": [],
                 "uses_default_features": false,
@@ -3734,7 +3780,7 @@
             "runtime_dependencies": [
               {
                 "name": "bitflags",
-                "package_key": "bitflags-2.13.0",
+                "package_key": "bitflags-2.13.1",
                 "kind": "normal",
                 "features": [],
                 "uses_default_features": false,
@@ -3865,7 +3911,7 @@
     "anstyle-query-1.1.5": {
       "edition": "2021"
     },
-    "anyhow-1.0.103": {
+    "anyhow-1.0.104": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -3881,16 +3927,16 @@
     "bit-vec-0.8.0": {
       "edition": "2015"
     },
-    "bitflags-2.13.0": {
+    "bitflags-2.13.1": {
       "edition": "2021"
     },
-    "cc-1.2.66": {
+    "cc-1.3.0": {
       "edition": "2018"
     },
     "cfg-if-1.0.4": {
       "edition": "2018"
     },
-    "clap-4.6.1": {
+    "clap-4.6.2": {
       "edition": "2024",
       "binaries": [
         {
@@ -3899,7 +3945,7 @@
         }
       ]
     },
-    "clap_builder-4.6.0": {
+    "clap_builder-4.6.2": {
       "edition": "2024"
     },
     "clap_derive-4.6.1": {
@@ -4032,7 +4078,7 @@
     "pretty_assertions-1.4.1": {
       "edition": "2018"
     },
-    "proc-macro2-1.0.106": {
+    "proc-macro2-1.0.107": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -4042,11 +4088,11 @@
     "quick-error-1.2.3": {
       "edition": "2015"
     },
-    "quote-1.0.46": {
+    "quote-1.0.47": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rand-0.9.4": {
+    "rand-0.9.5": {
       "edition": "2021"
     },
     "rand_chacha-0.9.0": {
@@ -4070,7 +4116,7 @@
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "rustls-0.23.41": {
+    "rustls-0.23.42": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -4087,15 +4133,15 @@
     "rusty-fork-0.3.1": {
       "edition": "2018"
     },
-    "serde-1.0.228": {
+    "serde-1.0.229": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "serde_core-1.0.228": {
+    "serde_core-1.0.229": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "serde_derive-1.0.228": {
+    "serde_derive-1.0.229": {
       "edition": "2021",
       "proc_macro": true
     },
@@ -4106,7 +4152,7 @@
     "shlex-2.0.1": {
       "edition": "2018"
     },
-    "simd-adler32-0.3.9": {
+    "simd-adler32-0.3.10": {
       "edition": "2018"
     },
     "smallvec-1.15.2": {
@@ -4121,7 +4167,10 @@
     "subtle-2.6.1": {
       "edition": "2018"
     },
-    "syn-2.0.118": {
+    "syn-2.0.119": {
+      "edition": "2021"
+    },
+    "syn-3.0.0": {
       "edition": "2021"
     },
     "synstructure-0.13.2": {
@@ -4130,11 +4179,11 @@
     "tempfile-3.27.0": {
       "edition": "2021"
     },
-    "thiserror-2.0.18": {
+    "thiserror-2.0.19": {
       "edition": "2021",
       "build_script": "build.rs"
     },
-    "thiserror-impl-2.0.18": {
+    "thiserror-impl-2.0.19": {
       "edition": "2021",
       "proc_macro": true
     },
@@ -4182,7 +4231,7 @@
     "webpki-roots-0.26.11": {
       "edition": "2021"
     },
-    "webpki-roots-1.0.8": {
+    "webpki-roots-1.0.9": {
       "edition": "2021"
     },
     "writeable-0.6.3": {
@@ -4198,7 +4247,7 @@
       "edition": "2021",
       "proc_macro": true
     },
-    "zerocopy-0.8.53": {
+    "zerocopy-0.8.54": {
       "edition": "2021",
       "build_script": "build.rs"
     },
@@ -4222,7 +4271,7 @@
       "edition": "2021",
       "proc_macro": true
     },
-    "zmij-1.0.21": {
+    "zmij-1.0.23": {
       "edition": "2021",
       "build_script": "build.rs"
     }
