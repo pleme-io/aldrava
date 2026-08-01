@@ -1,0 +1,54 @@
+name: release-binaries
+
+# Five-line consumer shim over substrate's cross-arch Rust binary release:
+# build (linux/macOS × x86_64/aarch64) -> attach binaries + .sha256 to the
+# GitHub Release for a `v*` tag.
+#
+# ── WHY THIS EXISTS (measured 2026-08-01) ───────────────────────────────────
+# aldrava had 2 tags, 0 releases, and FOUR green `auto-release` runs. That is
+# not a broken pipeline: auto-release.yml calls substrate's
+# `cargo-auto-release.yml`, whose job is bump -> commit -> tag -> push ->
+# publish to crates.io. It did exactly that, successfully, every time. It was
+# never going to produce a GitHub Release asset, because that is not what it
+# is for.
+#
+# Meanwhile three consumers in pleme-io/actions -- aldrava-resolve,
+# aldrava-dispatch, aldrava-lint -- install the tool with
+#
+#     curl -o /usr/local/bin/aldrava \
+#       https://github.com/pleme-io/aldrava/releases/latest/download/aldrava-<suffix>
+#
+# which returns 404 and always has. Until pleme-io/actions@a635710 added
+# --fail, curl exited 0 and wrote GitHub's 404 HTML to /usr/local/bin/aldrava,
+# chmod +x'd it, and the failure surfaced later as an exec error inside the
+# action's own logic. aldrava-resolve and aldrava-dispatch each have a live
+# consumer workflow.
+#
+# So the defect was never in either half on its own: the repo publishes a
+# CRATE and the consumers install a BINARY. This shim adds the missing
+# producer rather than changing how the consumers install, because a GitHub
+# Release binary is what an action on a runner can actually use -- `cargo
+# install` at job time would be the runtime-install anti-pattern
+# (theory/NIX-HARDENING.md §VI.1) that pleme-io/actions is currently removing.
+#
+# crates.io publishing is UNCHANGED: auto-release.yml still runs on push to
+# main. This is additive, and fires on the tag that auto-release already
+# pushes -- so the two legs compose without either knowing about the other.
+#
+# NOTE ON ASSET NAMES: substrate emits the suffixes
+# linux-x86_64 / linux-aarch64 / macos-x86_64 / macos-aarch64. The consuming
+# actions' own map used linux-arm64 / darwin-arm64 / darwin-x86_64 for three of
+# the four, and is being aligned to substrate's naming rather than substrate
+# being forked -- one convention, set by the producer.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch: {}
+
+jobs:
+  binaries:
+    uses: pleme-io/substrate/.github/workflows/rust-binary-release.yml@main
+    with:
+      binary-name: aldrava
+    secrets: inherit
