@@ -41,10 +41,25 @@ name: release-binaries
 # the four, and is being aligned to substrate's naming rather than substrate
 # being forked -- one convention, set by the producer.
 
+# TAG-ONLY, and the absence of workflow_dispatch is deliberate.
+#
+# The first draft of this file (500556c) carried `workflow_dispatch: {}`. That
+# would have been a "release now" button that releases NOTHING: substrate's
+# rust-binary-release.yml derives the version with
+# `ref="${GITHUB_REF#refs/tags/}"` and gates its upload on
+# `if: startsWith(github.ref, 'refs/tags/v')`. Dispatched from main,
+# github.ref is refs/heads/main -- so every matrix leg BUILDS, the upload step
+# SKIPS, and the run reports success having attached no asset. An operator
+# reaching for that button to fix the very 404 this workflow exists to fix
+# would get a green run and no release.
+#
+# That is the same failure-indistinguishable-from-success class the rest of
+# this campaign is removing, so it does not get to live in the fix for it.
+# The only way to produce a release is to push a `v*` tag, which
+# auto-release.yml does when cargo-bump finds a real version change.
 on:
   push:
     tags: ['v*']
-  workflow_dispatch: {}
 
 jobs:
   binaries:
