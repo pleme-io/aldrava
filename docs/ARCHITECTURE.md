@@ -104,7 +104,7 @@ commands):
 - **Unit tests** — `#[cfg(test)] mod tests` in each `src/*.rs`, one
   hand-picked example per specific behavior.
 - **Property tests** — `tests/property_*.rs`, `proptest`, 256 cases each
-  (the fleet floor is 100 — see the `compiler-verifier` skill). Pin the
+  (the fleet floor is 100 — see the `knowable-platform` skill). Pin the
   invariants a finite set of examples can't: the parser never panics on
   arbitrary bytes; trust resolution is monotonic in `Permission` (every
   tier at-or-above the minimum is trusted, every tier below is rejected,
