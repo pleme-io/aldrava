@@ -29,7 +29,7 @@ name: release-binaries
 # producer rather than changing how the consumers install, because a GitHub
 # Release binary is what an action on a runner can actually use -- `cargo
 # install` at job time would be the runtime-install anti-pattern
-# (theory/NIX-HARDENING.md §VI.1) that pleme-io/actions is currently removing.
+# that pleme-io/actions is currently removing.
 #
 # crates.io publishing is UNCHANGED: auto-release.yml still runs on push to
 # main. This is additive, and fires on the tag that auto-release already
